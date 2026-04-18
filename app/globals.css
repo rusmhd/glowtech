@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-glow-black-900: #000000;
+  --color-glow-black-800: #171717;
+  --color-glow-black-700: #1b1b1d;
+  
+  --color-glow-blue: #ffffff;
+  --color-glow-purple: #1d3a49;
+  --color-glow-chrome: #ffffff;
+  --color-glow-muted: #c7c7c7;
+  
+  --font-sans: var(--font-body), sans-serif;
+  --font-heading: var(--font-display), sans-serif;
+}
+
+@layer base {
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -12px, 0);
+    }
+  }
+
+  @keyframes drift-glow {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.65;
+    }
+    50% {
+      transform: translate3d(16px, -10px, 0) scale(1.04);
+      opacity: 0.92;
+    }
+  }
+
+  @keyframes soft-pulse {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    50% {
+      opacity: 0.72;
+    }
+  }
+
+  @keyframes gradient-breathe {
+    0%,
+    100% {
+      filter: saturate(1) brightness(1);
+    }
+    50% {
+      filter: saturate(1.15) brightness(1.08);
+    }
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-glow-black-900 text-glow-chrome font-sans antialiased selection:bg-glow-blue selection:text-black;
+    background-image:
+      radial-gradient(circle at 16% 0%, rgba(29, 58, 73, 0.3), transparent 45%),
+      radial-gradient(circle at 88% 22%, rgba(255, 255, 255, 0.08), transparent 38%),
+      linear-gradient(180deg, #000000 0%, #040506 65%, #000000 100%);
+    background-attachment: fixed;
+    letter-spacing: 0;
+    transition: background-color 0.8s ease;
+  }
+
+  body[data-theme="deep"] {
+    background-color: #030303;
+  }
+
+  body[data-theme="charcoal"] {
+    background-color: #070809;
+  }
+
+  body[data-theme="steel"] {
+    background-color: #0b0d10;
+  }
+
+  body[data-theme="graphite"] {
+    background-color: #09090b;
+  }
+
+  body[data-theme="black"] {
+    background-color: #000000;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-normal;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+
+  p {
+    @apply text-glow-muted;
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply border-b border-glow-black-700/80 bg-glow-black-900;
+  }
+
+  .section-grid {
+    background-image:
+      linear-gradient(to right, rgba(29, 58, 73, 0.22) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(29, 58, 73, 0.22) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .section-inner {
+    @apply container mx-auto px-4 md:px-6;
+    max-width: 1180px;
+  }
+
+  .section-label {
+    @apply text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55;
+  }
+
+  .headline-xl {
+    @apply font-heading text-white;
+    letter-spacing: -0.05em;
+    line-height: 0.88;
+  }
+
+  .panel-soft {
+    @apply border border-white/10 bg-white/5 backdrop-blur-sm;
+  }
+
+  .display-kicker {
+    @apply inline-flex items-center rounded-full border border-glow-blue/40 bg-glow-blue/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-glow-blue;
+  }
+
+  .studio-panel {
+    @apply border border-glow-black-700 bg-glow-black-800/80;
+  }
+
+  .marquee-mask {
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  }
+
+  .animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+  }
+
+  .animate-drift-glow {
+    animation: drift-glow 10s ease-in-out infinite;
+  }
+
+  .animate-soft-pulse {
+    animation: soft-pulse 4.5s ease-in-out infinite;
+  }
+
+  .animate-gradient-breathe {
+    animation: gradient-breathe 9s ease-in-out infinite;
+  }
+}
+
