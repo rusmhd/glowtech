@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
 import Magnetic from "@/components/Magnetic";
 
@@ -11,12 +11,12 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const linkVariants = {
+  const linkVariants: Variants = {
     hidden: { opacity: 0, y: -8 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
-      transition: { delay: 0.08 + i * 0.05, duration: 0.35, ease: "easeOut" },
+      transition: { delay: 0.08 + i * 0.05, duration: 0.35, ease: [0.22, 1, 0.36, 1] },
     }),
   };
 
